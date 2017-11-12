@@ -12,14 +12,9 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-	stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-              }
-            }
+	stage('Run') {
             steps {
-                sh 'make publish'
+                sh './jenkins/scripts/deliver.sh' 
             }
         }
     }
